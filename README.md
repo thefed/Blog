@@ -1,2 +1,2 @@
 # Blog
-Used by blog
+random thoughts
