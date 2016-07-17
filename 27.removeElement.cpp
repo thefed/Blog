@@ -4,6 +4,16 @@
 #include<time.h>    // clock
 using namespace std;
 
+void testNumsWithRareVals();
+void testNumsWithFreqVals();
+
+int main() {
+    cout << "/*\n";
+    testNumsWithRareVals();
+    testNumsWithFreqVals();
+    cout << "*/\n";
+}
+
 // two pointers
 int removeElement(vector<int>& nums, int val) {
     if (nums.size() == 0)
@@ -74,9 +84,31 @@ int removeElement3(vector<int>& nums, int val) {
     return nums[start] == val ? start: start + 1; 
 }
 
+void runFunc(vector<int>&nums, const int val, const int expected) {
+    const int N = 1E3;
+    clock_t t = clock();
+    assert(removeElement(nums, val) == expected && "wrong output");
+    for (int i = 0; i < N; i++)
+        removeElement(nums, val);
+    cout << "len: " << removeElement(nums, val) << endl;
+    cout << "removeElement: " << clock() - t << " ms\n";
+
+    t = clock();    
+    assert(removeElement2(nums, val) == expected);
+    for (int i = 0; i < N; i++)
+        removeElement2(nums, val); 
+    cout << "removeElement2: " << clock() - t << " ms\n";
+
+    t = clock();
+    assert(removeElement3(nums, val) == expected);
+    for (int i = 0; i < N; i++)
+        removeElement3(nums, val);
+    cout << "removeElement3: " << clock() - t << " ms\n";
+}
+
 void testNumsWithRareVals() {
     cout << "** testNumsWithRareVals **" << endl;
-    int val = 2;
+    const int val = 2;
     const int NUM = 100;
     int* array = new int[NUM];
     for (int i = 0; i < NUM; i++) {
@@ -84,72 +116,30 @@ void testNumsWithRareVals() {
     }
     vector<int> nums(array, array + NUM);
     const int expected = NUM - 1;
-    const int N = 1E3;
-    clock_t t = clock();
-    assert(removeElement(nums, val) == expected && "wrong output");
-    for (int i = 0; i < N; i++)
-        removeElement(nums, val);
-    cout << "len: " << removeElement(nums, val) << endl;
-    cout << "removeElement: " << clock() - t << " ms\n";
-
-    t = clock();    
-    assert(removeElement2(nums, val) == expected);
-    for (int i = 0; i < N; i++)
-        removeElement2(nums, val); 
-    cout << "removeElement2: " << clock() - t << " ms\n";
-
-    t = clock();
-    assert(removeElement3(nums, val) == expected);
-    for (int i = 0; i < N; i++)
-        removeElement3(nums, val);
-    cout << "removeElement3: " << clock() - t << " ms\n";
+    runFunc(nums, val, expected);
     delete [] array;
 }
 
 void testNumsWithFreqVals() {
     cout << "** testNumsWithFreqVals **" << endl;
-    int val = 2;
+    const int val = 2;
     // int array[8] = {1, 2, 2, 3, 5, 6, 2, 2};
     const int NUM = 100;
     vector<int> nums;
     nums.assign(NUM, val);
     const int expected = 0;
-    const int N = 1E3;
-    clock_t t = clock();
-    assert(removeElement(nums, val) == expected && "wrong output");
-    for (int i = 0; i < N; i++)
-        removeElement(nums, val);
-    cout << "len: " << removeElement(nums, val) << endl;
-    cout << "removeElement: " << clock() - t << " ms\n";
-
-    t = clock();    
-    assert(removeElement2(nums, val) == expected);
-    for (int i = 0; i < N; i++)
-        removeElement2(nums, val); 
-    cout << "removeElement2: " << clock() - t << " ms\n";
-
-    t = clock();
-    assert(removeElement3(nums, val) == expected);
-    for (int i = 0; i < N; i++)
-        removeElement3(nums, val);
-    cout << "removeElement3: " << clock() - t << " ms\n";
+    runFunc(nums, val, expected);
 }
 
-int main() {
-    cout << "/*\n";
-    testNumsWithRareVals();
-    testNumsWithFreqVals();
-    cout << "*/\n";
-}
 /*
 ** testNumsWithRareVals **
 len: 99
-removeElement: 427 ms
-removeElement2: 918 ms
-removeElement3: 345 ms
+removeElement: 426 ms
+removeElement2: 917 ms
+removeElement3: 342 ms
 ** testNumsWithFreqVals **
 len: 0
-removeElement: 429 ms
-removeElement2: 752 ms
-removeElement3: 319 ms
+removeElement: 427 ms
+removeElement2: 745 ms
+removeElement3: 341 ms
 */
