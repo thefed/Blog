@@ -89,7 +89,7 @@ void testNumsWithRareVals() {
     assert(removeElement(nums, val) == expected && "wrong output");
     for (int i = 0; i < N; i++)
         removeElement(nums, val);
-    cout << removeElement(nums, val) << endl;
+    cout << "len: " << removeElement(nums, val) << endl;
     cout << "removeElement: " << clock() - t << " ms\n";
 
     t = clock();    
@@ -119,7 +119,7 @@ void testNumsWithFreqVals() {
     assert(removeElement(nums, val) == expected && "wrong output");
     for (int i = 0; i < N; i++)
         removeElement(nums, val);
-    cout << removeElement(nums, val) << endl;
+    cout << "len: " << removeElement(nums, val) << endl;
     cout << "removeElement: " << clock() - t << " ms\n";
 
     t = clock();    
@@ -136,6 +136,20 @@ void testNumsWithFreqVals() {
 }
 
 int main() {
+    cout << "/*\n";
     testNumsWithRareVals();
     testNumsWithFreqVals();
+    cout << "*/\n";
 }
+/*
+** testNumsWithRareVals **
+len: 99
+removeElement: 427 ms
+removeElement2: 918 ms
+removeElement3: 345 ms
+** testNumsWithFreqVals **
+len: 0
+removeElement: 429 ms
+removeElement2: 752 ms
+removeElement3: 319 ms
+*/
