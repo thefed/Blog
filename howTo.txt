@@ -1,0 +1,2 @@
+1. Modify git user at terminal
+    change current user in file ~/.gitconfig to your expected Github username
