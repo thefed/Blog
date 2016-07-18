@@ -1,2 +1,6 @@
 1. Modify git user at terminal
     change current user in file ~/.gitconfig to your expected Github username
+2. Vim copy n lines
+    press v (char based visual selection) or press V (Visual Line mode), ctrl-v or ctrl-q (select a block)
+    press y(ank) or d(delete), p(aste) after cursor, P(aste) before cursor)
+ 

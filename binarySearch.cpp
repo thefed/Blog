@@ -71,6 +71,9 @@ void testBSWoDuplicates() {
     const int target = 10;
     const int expected = 20;
     runFunc(nums, target, expected);
+    nums.clear();
+    vector<int> nums2(N, target);
+    runFunc(nums2, target, 0);
 }
 
 void testBSWithDistinctNums() {
@@ -84,3 +87,8 @@ void testBSWithDistinctNums() {
     const int expected = N/2;
     runFunc(nums, target, expected);
 }
+/*
+** testBSWithInexistentTarget **
+** testBSWoDuplicates **
+** testBSWithDistinctNums **
+*/
