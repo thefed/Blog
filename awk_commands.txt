@@ -1,0 +1,118 @@
+# awk commands
+awk 'BEGIN{printf "Sr No\tName\tSub\tMarks\n"} {print}' marks.txt
+
+# display whole file
+awk '{print}' marks.txt
+
+# execute a awk command from file
+awk -f cmd.awk marks.txt
+
+# -v option, assign value
+awk -v name=Jerry 'BEGIN{printf "Name = %s\n", name}'
+
+# print certain columns
+awk '{print $3 "\t" $4}' marks.txt
+
+# print all lines than matches 'a'
+awk '/a/ {print $0}' marks.txt
+
+# print columns by pattern
+awk '/a/ {print $3 "\t" $4}' marks.txt
+
+# print columns in any order
+awk '/a/ {print $4 "\t" $3}' marks.txt
+
+# count and print matched pattern
+awk '/a/{++cnt} END {print "Count = ", cnt}' marks.txt
+
+# print lines with more than 18 characters
+# $0 stores the entire line
+awk 'length($0) > 18' marks.txt
+
+# add a newline to each line
+awk '{print $0"\n"}' marks.txt >> newMarks.txt
+
+# remove blank lines
+awk '/./' newMarks.txt
+
+# display environment variables
+awk 'BEGIN {print ENVIRON["USER"]}'
+
+# display filename
+awk 'END {print FILENAME}' marks.txt
+
+# change default input field separator (FS)
+awk 'BEGIN {print "FS = " FS}' | cat -vte
+
+# get number of fields (NF) in current line
+echo -e "One Two\nOne Two three\n\One two three four" | awk 'NF > 2'
+
+# get number of current records (NR)
+echo -e "1 2\n1 2 3\n1 2 3 4" | awk 'NR < 3'
+
+# FNR, similar to NR, relative to the current file
+
+# OFMT, output format, default %.6g
+awk 'BEGIN {print "OFMT = " OFMT}'
+
+# OFS, output field separator
+
+＃ $0, entire input record
+awk '{print $0}' marks.txt
+
+# IGNORECASE
+awk 'BEGIN{IGNORECASE = 1} /amit/' marks.txt
+
+# string concatenation and numbers addition
+echo 5 4 | awk '{print $1 + $2}'
+# ->9
+echo 5 4 | awk '{print $1 $2}'
+# ->54
+echo 5 4 | awk '{print $1, $2}'
+# -> 5, 4
+
+# For loops
+awk '{for (i = 2; i < NF; i++) printf "%s ", $i; printf "\n"; }' marks.txt
+# -> NF = 4
+
+# "print" adds a newline implicitly, "printf" does not
+
+## awk regular expression
+# Dot, matched any single character except for the end of line character
+echo -e "cat\nbat\nfun\nfin\nfan" | awk '/f.n/'
+
+# to match the start of line "^"
+echo -e "this\nthat\nthere\ntheir\n" | awk '/^the/'
+
+# to match the end of line "$", ends with sth
+echo -e "knife\nknow\nfun\n\fin\nnine" | awk '/n$/'
+
+# match character set, []
+echo -e "call\ntall\nball" | awk '/[cb]all/'
+echo -e "call\ntall\nball" | awk '/call|ball/'
+
+# zero or one occurence: ?
+echo -e "Colour\nColor" | awk '/Colou?r/'
+
+# zero or more occurence: *
+echo -e "ca\ncat\ncatt" | awk '/cat*/'
+
+# one or more occurence: +
+echo -e "111\n22\n123\n234\n456\n222" | awk '/2+/'
+
+# grouping: (); alternatives: |
+echo -e "apple juice\napple pie\napple tart\napple cake" | awk '/apple (juice|cake)/'
+
+# redirection: print DATA > outputFile
+echo "hello world" > tmp.txt
+cat tmp.txt
+
+awk 'BEGIN { print "Hello World !!!" > "tmp.txt" }'
+cat tmp.txt
+
+# append: >>
+
+# pipe: |
+# print items | command
+
+# 
