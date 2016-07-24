@@ -1,0 +1,8 @@
+Miscenaneous operations
+
+1. calculate a positive integer mod another integer (power of two) without modulus operation (%)
+    int x = 100;
+    int y = x % 8;  // = x & 7
+
+2. isPalindrom?
+    time complexity O(n), before comparing, ask if the input string contains non-alphabetic or numeric characters, whether case sensative, remove white spaces, etc. 
