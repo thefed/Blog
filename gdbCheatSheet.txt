@@ -1,0 +1,33 @@
+gdb commands
+
+text UI mode: gdb -tui filename
+
+step out: finish
+
+step into: step or s
+
+next line: next or n
+
+run to: run or r
+
+continue: c
+
+set a breakpoint: break 1; b 1 (LINE_NUM), b METHOD_NAME, b FILE_NAME:LINE_NUM
+
+show all breakpoints: info br; or i b
+
+del a breakpoint: del 1, clear METHOD_NAME
+
+examine variables: disp VARIABLE, print or p VARIABLE, printf "%08x\n", i
+
+frame: f
+
+backtrace: bt
+
+change variables value at runtime: set (i = 20), set variable i = 40
+
+hardware watchpoints: watch i, continue
+
+call a function: call METHOD_NAME(PARAMS)
+
+
