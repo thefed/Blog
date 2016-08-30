@@ -58,7 +58,6 @@ int lengthLongestPath(string input) {
         if (tabCnt == st.size()) {  // current level
             st.push_back(fname);
             if (isFile(fname)) {
-                print(st);
                 len = getPathLen(st);
                 maxLen = max(len, maxLen);
             }
