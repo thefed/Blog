@@ -13,6 +13,7 @@ int shortestWordDistance(vector<string> &words, string word1, string word2) {
 	int index1 = -1;		// index of word1
 	int index2 = -1;		// index of word2
 	int res = words.size();	// returned distance of words
+        // sequential search, O(N), update shortest distance value
 	for (int i = 0; i < words.size(); i++) {
 		if (words[i] == word1) {
 			index1 = i;
@@ -30,17 +31,19 @@ int shortestWordDistance(vector<string> &words, string word1, string word2) {
 	return res;
 }
 // follow up: function will be called many times, how to optimize it?
-// solution: speed up find with unordered_map
+// solution: speed up find with unordered_map, avg. time O(1), worst O(N)
 class WordDistance {
 private:
 	unordered_map<string, vector<int> > wordIndex;
 public:
+        // initialize map on contruction
 	WordDistance(const vector<string> &words) {
 		for (int i = 0; i < words.size(); i++) {
 			wordIndex[words[i]].push_back(i);
 		}
 	}
 
+        // use two pointers to find min distance
 	int shortest(string word1, string word2) {
 		vector<int> indexes1 = wordIndex[word1];
 		vector<int> indexes2 = wordIndex[word2];
