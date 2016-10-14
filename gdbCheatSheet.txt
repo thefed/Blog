@@ -1,6 +1,6 @@
-gdb commands
+== gdb commands ==
 
-text UI mode: gdb -tui filename
+enter text UI mode: gdb -tui filename
 
 step out: finish
 
@@ -14,13 +14,15 @@ continue: c
 
 set a breakpoint: break 1; b 1 (LINE_NUM), b METHOD_NAME, b FILE_NAME:LINE_NUM
 
+set conditional breakpoint: break filename:linenumber if strcmp(var, "hello") == 0, example: break 20 if x == 6
+
 show all breakpoints: info br; or i b
 
 del a breakpoint: del 1, clear METHOD_NAME
 
 examine variables: disp VARIABLE, print or p VARIABLE, printf "%08x\n", i
 
-frame: f
+show frame: f
 
 backtrace: bt
 
@@ -29,5 +31,4 @@ change variables value at runtime: set (i = 20), set variable i = 40
 hardware watchpoints: watch i, continue
 
 call a function: call METHOD_NAME(PARAMS)
-
 
