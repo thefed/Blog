@@ -50,7 +50,7 @@ void testSqrt() {
     cout << "** testSqrt **\n";
     int x = 122;
     int r = (int) sqrt(x);
-    assert(sqrt1(x) == r && "wrong output");
+    assert(sqrt1(x) == r);
     cout << "SUCCESS\n";
 }
 
@@ -60,7 +60,7 @@ void testSqrt2() {
     double r = sqrt(double(x));
     double actual = sqrt2(x);
     printf("actual: %f, expected: %f\n", actual, r);
-    assert(actual - r < 1e-4 && "wrong output");
+    assert(actual - r < 1e-4);
     cout << "SUCCESS\n";
 }
 /*

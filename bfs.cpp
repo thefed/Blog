@@ -2,7 +2,6 @@
 #include<queue>     // queue
 #include<list>      // list
 using namespace std;
-
 class Graph{
     int V;
     list<int> *adj;    // adjacency list
@@ -52,5 +51,4 @@ int main() {
     cout << "BFS traversal\n";
     g.BFS(2);
     return 0;
-    
 }

@@ -21,8 +21,7 @@ int main() {
 }
 
 int binarySearch(vector<int>& nums, int target){
-    if (nums.size() == 0)
-        return -1;
+    if (nums.empty()) return -1;
     int start = 0;
     int end = nums.size() - 1;
     while (start + 1 < end) {
@@ -45,8 +44,7 @@ int binarySearch(vector<int>& nums, int target){
 }
 
 void runFunc(vector<int>& nums, int target, const int expected) {
-    int actual = binarySearch(nums, target);
-    assert(actual == expected && "wrong output");
+    assert(binarySearch(nums, target) == expected);
 }
 
 void testBSWithInexistentTarget() {
@@ -87,8 +85,3 @@ void testBSWithDistinctNums() {
     const int expected = N/2;
     runFunc(nums, target, expected);
 }
-/*
-** testBSWithInexistentTarget **
-** testBSWoDuplicates **
-** testBSWithDistinctNums **
-*/
