@@ -13,6 +13,7 @@ struct TreeNode {
 };
 TreeNode* sortedArrayToBSTHelper(vector<int> &nums, int start, int end) {
     if (start > end) return NULL;
+    else if (start == end) return new TreeNode(nums[start]);
     //if (nums.empty()) return NULL;
     // 1 2 3 4 5 6 
     //      4
@@ -22,7 +23,7 @@ TreeNode* sortedArrayToBSTHelper(vector<int> &nums, int start, int end) {
     //  1  3 5 
     // the middle element in nums should be root
     // inorder traversal, resurion
-    int mid = (start + end) / 2;
+    int mid = (start + end + 1) / 2;
     TreeNode *root = new TreeNode(nums[mid]);
     root->left = sortedArrayToBSTHelper(nums, start, mid - 1);
     root->right = sortedArrayToBSTHelper(nums, mid + 1, end);
@@ -42,12 +43,14 @@ bool sameTree(TreeNode *root1, TreeNode *root2) {
     while (!q1.empty() && !q2.empty()) {
         int sizeQ1 = q1.size();
         int sizeQ2 = q2.size();
+        assert(sizeQ1 == sizeQ2);
         if (sizeQ1 != sizeQ2) return false;
         for (int i = 0; i < sizeQ1; i++) {
             TreeNode *curr1 = q1.front();
             q1.pop();
             TreeNode *curr2 = q2.front();
             q2.pop();
+            assert(curr1->val == curr2->val);
             if (curr1->val != curr2->val) return false;
             // check left subtree
             if (!curr1->left && !curr2->left) {}
@@ -75,11 +78,43 @@ void deleteTree(TreeNode *root) {
     delete root;
     // or BFS traversal, use queue
 }
+void inorderPrint(TreeNode *root) {
+    queue<TreeNode*> q;
+    printf("Tree inorder: ");
+    if (!root) return;
+    q.push(root);
+    while (!q.empty()) {
+        int size = q.size();
+        for (int i = 0; i < size; i++) {
+            TreeNode *curr = q.front();
+            q.pop();
+            printf("%d ", curr->val);
+            if (curr->left) q.push(curr->left); 
+            if (curr->right) q.push(curr->right); 
+        }
+    }
+    printf("\n");
+}
 int main() {
     vector<int> nums;
     assert(sortedArrayToBST(nums) == NULL);
-    TreeNode *root = new TreeNode(1);
-    vector<int> nums2(1, 1);
+    // test single root, with value 4
+    TreeNode *root = new TreeNode(4);
+    vector<int> nums2(1, 4);
     assert(sameTree(sortedArrayToBST(nums2), root) == true);
+
+    // create an example tree
+    root->left = new TreeNode(2);
+    root->left->left = new TreeNode(1);
+    root->left->right = new TreeNode(3);
+    root->right = new TreeNode(6);
+    root->right->left = new TreeNode(5);
+    int array[6] = {1, 2, 3, 4, 5, 6};
+    vector<int> nums3(array, array + sizeof(array) / sizeof(int));
+    inorderPrint(root);
+    inorderPrint(sortedArrayToBST(nums3));
+    assert(sameTree(sortedArrayToBST(nums3), root) == true);
+
+    deleteTree(root);
     printf("Success.\n");    
 }
