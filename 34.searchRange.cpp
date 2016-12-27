@@ -1,3 +1,4 @@
+// return the lower and upper bound of given target, if not in range, return [-1, -1]
 #include<iostream>
 #include<vector>
 #include<assert.h>
@@ -49,24 +50,15 @@ vector<int> searchRange(vector<int>& nums, int target) {
     }
     return res;
 }
-void testSearchRange(){
+int main() {
+    // testSearchRange
     int array[] = {5, 7, 7, 8, 8, 10};
     int target = 8;
     vector<int> nums(array, array + sizeof(array) / sizeof(int));
     vector<int> res = searchRange(nums, target);
-    vector<int> exp(2, 0);
-    exp[0] = 3;
-    exp[1] = 4;
-    for (int i = 0; i < res.size(); i++) {
-        assert(res[i] == exp[i] && "wrong output");
-    }
+    assert(res[0] == 3 && res[1] == 4);
 
     target = 11;
     res = searchRange(nums, target);
-    for (int i = 0; i < res.size(); i++) {
-        assert(res[i] == -1 && "wrong output");
-    }
-}
-int main() {
-    testSearchRange();
+    assert(res[0] == -1 && res[1] == -1);
 }
