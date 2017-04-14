@@ -58,6 +58,7 @@ bool isAvailable(const vector<string> &grid, int row, int col) {
         if (grid[i][j] == 'Q') return false;
     return true;
 }
+// recursive method, need 
 void solveNQueensBFHelper(vector<vector<string> > &res, vector<string> &grid, int row, int n) {
     if (row == n) {
         res.push_back(grid); return;
@@ -78,9 +79,9 @@ vector<vector<string> > solveNQueensBF(int n) {
     return res;
 }
 
+// note: vector<bool> is not recommended here, as it needs more calculation, despite it is space efficient
+// this method uses three boolean arrays to check whether current row/col/diagnals is available in constant time
 void solveNQueensDFS(vector<vector<string> > &res, vector<string> &grid, vector<char> &cols, vector<char> &d45, vector<char> &d135, int row, const int n) {
-//void solveNQueensDFS(vector<vector<string> > &res, vector<string> &grid, vector<int> &cols, vector<int> &d45, vector<int> &d135, int row, const int n) {
-//void solveNQueensDFS(vector<vector<string> > &res, vector<string> &grid, vector<bool> &cols, vector<bool> &d45, vector<bool> &d135, int row, const int n) {
     if (row == n) {
         res.push_back(grid); return;
     }

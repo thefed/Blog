@@ -1,6 +1,12 @@
-== gdb commands ==
+HC, 2/3/2017
+
+== gdb commands and short forms ==
 
 enter text UI mode: gdb -tui filename
+
+get help of a command: help <cmd-name> or h <cmd-name>
+
+gdb supports TAB to autocomplete (filenames, function names, variable names, etc)
 
 step out: finish
 
@@ -14,21 +20,32 @@ continue: c
 
 set a breakpoint: break 1; b 1 (LINE_NUM), b METHOD_NAME, b FILE_NAME:LINE_NUM
 
-set conditional breakpoint: break filename:linenumber if strcmp(var, "hello") == 0, example: break 20 if x == 6
+set a conditional breakpoint: break filename:lineNumber if strcmp(var, "hello") == 0, example: break 20 if x == 6
 
 show all breakpoints: info br; or i b
 
-del a breakpoint: del 1, clear METHOD_NAME
+delete a breakpoint: del 1 or clear METHOD_NAME or clear lineNum or clear filename:funcName
+
+delete all breakpoints: del (d)
+
+save breakpoints to a file: save breakpoints <filename> or save br <filename>
+
+load breakpoints from a script file: source <filename>
+
+set a watchpoint: watch expr, GDB will break when the value of expr changes.
 
 examine variables: disp VARIABLE, print or p VARIABLE, printf "%08x\n", i
 
-show frame: f
+display a pointer value: p *(int *)0x112203xx
+
+show frame: frame (f)
+
+go to frame n: f <frame_num>
+
+move up/down n frames: up n or down n
 
 backtrace: bt
 
-change variables value at runtime: set (i = 20), set variable i = 40
-
-hardware watchpoints: watch i, continue
+change variable value at runtime: set (i = 20), set variable i = 40
 
 call a function: call METHOD_NAME(PARAMS)
-

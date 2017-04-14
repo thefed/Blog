@@ -11,6 +11,7 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+// recursive solution
 TreeNode* sortedArrayToBSTHelper(vector<int> &nums, int start, int end) {
     if (start > end) return NULL;
     else if (start == end) return new TreeNode(nums[start]);
@@ -32,6 +33,10 @@ TreeNode* sortedArrayToBSTHelper(vector<int> &nums, int start, int end) {
 TreeNode* sortedArrayToBST(vector<int> &nums) {
     return sortedArrayToBSTHelper(nums, 0, nums.size() - 1);
 }
+// LC 100: same tree, iterative solution
+// recursive solution: 2 lines
+// if (!p || !q) return p == q; // one of the given roots is NULL
+// return sameTree(p->val == q->val && sameTree(p->left, q->left) && sameTree(p->right, q->right));
 bool sameTree(TreeNode *root1, TreeNode *root2) {
     if (!root1 && !root2) return true;
     else if (!root1 || !root2) return false; // one of them is null

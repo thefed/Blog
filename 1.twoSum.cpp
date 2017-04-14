@@ -16,23 +16,20 @@ vector<int> twoSum(vector<int>& nums, int target) {
     }
     return res;
 }
-void testTwoSum() {
-    int array[] = {12, 2, 2, 12};	// create vector from array
-    vector<int> nums(array, array + sizeof(array) / sizeof(int));
+int main() {
+    //int array[] = {12, 2, 2, 12};	// create vector from array
+    //vector<int> nums(array, array + sizeof(array) / sizeof(int));
+    vector<int> nums = {12, 2, 2, 12};
     int target = 4;
     vector<int> res = twoSum(nums, target);
     printf("Ret index: %d, %d\n", res[0], res[1]);
-    assert(res.size() == 2 && nums[res[0]] + nums[res[1]] == target && "wrong output");
+    assert(res.size() == 2 && nums[res[0]] + nums[res[1]] == target);
 
-    int array2[] = {12, 2, 4, 12};
-    vector<int> nums2(array2, array2 + sizeof(array2) / sizeof(int));
+    vector<int> nums2 = {12, 2, 4, 12};
     target = 14;
     res = twoSum(nums2, target);
     printf("Ret index: %d, %d\n", res[0], res[1]);
-    assert(res.size() == 2 && nums2[res[0]] + nums2[res[1]] == target && "wrong output");
+    assert(res.size() == 2 && nums[res[0]] + nums[res[1]] == target);
     cout << "SUCCESS\n";
-}
-int main() {
-    testTwoSum();
     return 0;
 }
