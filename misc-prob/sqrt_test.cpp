@@ -1,23 +1,11 @@
-#include<iostream>  // cout
-#include<math.h>      // sqrt
-#include<assert.h>  // assert
+// impl sqrt, return int / double
+#include <iostream>  
+#include <math.h>      // sqrt
+#include <cassert>    
 using namespace std;
 
-// find the last number n such that n ^ 2 <= x
-int sqrt1(int x);
-// followup, return a double type sqrt of x
-double sqrt2(int x);
-void testSqrt();
-void testSqrt2();
-
-int main() {
-    cout << "/*\n";
-    testSqrt();
-    testSqrt2();
-    cout << "*/\n";
-}
-
-int sqrt1(int x) {
+// return the last integer n, where n^2 <= x
+int sqrt_int(int x) {
     long start = 1;
     long end = x;
     while (start + 1 < end) {
@@ -32,7 +20,8 @@ int sqrt1(int x) {
     return (end * end <= x) ? int(end): int(start);
 }
 
-double sqrt2(int x) {
+// follow-up, return the double type sqrt of x
+double sqrt_d(int x) {
     double start = 1;
     double end = x;
     while ((end - start) > 1e-6) {
@@ -46,27 +35,29 @@ double sqrt2(int x) {
     }
     return (end * end <= x) ? end: start;
 }
+
 void testSqrt() {
-    cout << "** testSqrt **\n";
     int x = 122;
     int r = (int) sqrt(x);
-    assert(sqrt1(x) == r);
-    cout << "SUCCESS\n";
+    printf("sqrt_int(%d): %d\n", x, r);
+    assert(sqrt_int(x) == r);
 }
 
-void testSqrt2() {
-    cout << "** testSqrt2 **\n";
+void testsqrt_d() {
     int x = 122;
     double r = sqrt(double(x));
-    double actual = sqrt2(x);
-    printf("actual: %f, expected: %f\n", actual, r);
+    double actual = sqrt_d(x);
+    printf("sqrt_d(%d): actual: %f, expected: %f\n", x, actual, r);
     assert(actual - r < 1e-4);
-    cout << "SUCCESS\n";
+}
+
+int main() {
+    cout << "/*\n";
+    testSqrt();
+    testsqrt_d();
+    cout << "*/\n";
 }
 /*
-** testSqrt **
-SUCCESS
-** testSqrt2 **
-actual: 11.045361, expected: 11.045361
-SUCCESS
+sqrt_int(122): 11
+sqrt_d(122): actual: 11.045361, expected: 11.045361
 */

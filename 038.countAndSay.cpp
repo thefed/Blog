@@ -36,23 +36,18 @@ string countAndSay(int n) {
 void test() {
     string actual = countAndSay(1);
     assert(actual == "1" && "wrong output");
-    printf("SUCCESS\n");
 
     actual = countAndSay(2);
     assert(actual == "11" && "wrong output");    
-    printf("SUCCESS\n");
 
     actual = countAndSay(3);
     assert(actual == "21" && "wrong output");    
-    printf("SUCCESS\n");
 
     actual = countAndSay(4);
     assert(actual == "1211" && "wrong output");    
-    printf("SUCCESS\n");
 
     actual = countAndSay(5);
     assert(actual == "111221" && "wrong output");    
-    printf("SUCCESS\n");
 }
 int main() {
     test();

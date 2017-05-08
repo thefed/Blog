@@ -2,6 +2,7 @@
 #include<vector>
 #include<assert.h>
 using namespace std;
+// return one-based index, given sorted array, use two pointers
 vector<int> twoSum(vector<int>& numbers, int target) {
     vector<int> res;
     for (int i = 0; i < numbers.size() - 1; i++) {
@@ -32,13 +33,13 @@ vector<int> twoSum(vector<int>& numbers, int target) {
     return res;
 }
 void test() {
-    int arr[] = {2, 7, 11, 15};
+    vector<int> numbers = {2, 7, 11, 15};
     int target = 9;
-    vector<int> numbers(arr, arr + sizeof(arr) / sizeof(int));
     vector<int> actual = twoSum(numbers, target);
     assert(actual.size() == 2 && "wront output size");
     cout << actual[0] << ", " << actual[1] << endl;
     assert(actual[0] == 1 && actual[1] == 2 && "wrong output");
+    assert(actual == (vector<int> {1, 2}));
 }
 int main() {
     test();

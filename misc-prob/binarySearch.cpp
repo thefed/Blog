@@ -1,13 +1,13 @@
-#include<iostream>  // cout
-#include<vector>    // vector
-#include<algorithm> // sort
-#include<assert.h>  // assert
+#include <iostream> 
+#include <vector>  
+#include <algorithm> // sort
+#include <assert.h> 
+#include <string> 
 using namespace std;
 
 const int N = 100;
 // binary search, find the first position of target, return -1 if not exist
 int binarySearch(vector<int>& nums, int target);
-void runFunc(vector<int>& nums, int target, const int expected);
 void testBSWithInexistentTarget();
 void testBSWoDuplicates();
 void testBSWithDistinctNums();
@@ -29,9 +29,6 @@ int binarySearch(vector<int>& nums, int target){
         if (nums[mid] < target) {
            start = mid;
         }
-        else if (nums[mid] == target) {
-            end = mid;
-        } 
         else {
             end = mid;
         }
@@ -43,45 +40,47 @@ int binarySearch(vector<int>& nums, int target){
     return -1;
 }
 
-void runFunc(vector<int>& nums, int target, const int expected) {
-    assert(binarySearch(nums, target) == expected);
+// test target function, with given input
+void test(int f(vector<int>&, int), vector<int>& nums, int target, int exp, string msg="") {
+    cout << msg;
+    int res = (*f)(nums, target);
+    printf("%d\n", res);
+    assert(res == exp);
 }
 
 void testBSWithInexistentTarget() {
-    cout << "** testBSWithInexistentTarget **\n";
-    int *array = new int[N];
-    for (int i = 0; i < N; i++)
-        *(array + i) = 2 * i + 1;
-    vector<int> nums(array, array + N);
-    delete array;
+    vector<int> nums(N);    // 1,3,5...
+    for (int i = 0; i < N; i++) nums[i] = 2*i + 1;
     const int target = -1;
     const int expected = -1;
-    runFunc(nums, target, expected);
+    test(binarySearch, nums, target, expected, "search inexistent item: \n");
 }
 
 void testBSWoDuplicates() {
-    cout << "** testBSWoDuplicates **\n";
-    int *array = new int[N];
-    for (int i = 0; i < N; i++)
-        *(array + i) = i / 2;
-    vector<int> nums(array, array + N);
-    delete array;
+    vector<int> nums(N);    // 0,0,1,1,2,2...
+    for (int i = 0; i < N; i++) nums[i] = i / 2;
     const int target = 10;
     const int expected = 20;
-    runFunc(nums, target, expected);
-    nums.clear();
+    test(binarySearch, nums, target, expected, "array with duplicates: \n");
+
     vector<int> nums2(N, target);
-    runFunc(nums2, target, 0);
+    test(binarySearch, nums2, target, 0, "array with duplicates: \n");
 }
 
 void testBSWithDistinctNums() {
-    cout << "** testBSWithDistinctNums **\n";
-    int *array = new int[N];
-    for (int i = 0; i < N; i++)
-        *(array + i) = i;
-    vector<int> nums(array, array + N);
-    delete array;
+    vector<int> nums(N);
+    for (int i = 0; i < N; i++) nums[i] = i;
     const int target = N/2;
     const int expected = N/2;
-    runFunc(nums, target, expected);
+    test(binarySearch, nums, target, expected, "array has no duplicates: \n");
 }
+/*
+search inexistent item: 
+-1
+array with duplicates: 
+20
+array with duplicates: 
+0
+array has no duplicates: 
+50
+*/

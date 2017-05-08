@@ -36,13 +36,10 @@ vector<int> maxSlidingWindow(vector<int> &nums,  int k) {
 // -4 -5 + 6 => 6;  res +nums[6]
 // -6 + 7 => 7;     res +nums[7]
 int main() {
-    vector<int> nums = {1, 3, -1, -3, 5, 3, 6, 7};  // -std=c++11
+    vector<int> nums = {1, 3, -1, -3, 5, 3, 6, 7}; 
     int k = 3;  // window size
     vector<int> res = maxSlidingWindow(nums, k);
     vector<int> exp = {3, 3, 5, 5, 6, 7};   // expected return value
-    assert(res.size() == exp.size());
-    for (int i = 0; i < exp.size(); i++) {
-        assert(res[i] == exp[i]);
-    }
+    assert(res == exp);
     return 0;
 }
