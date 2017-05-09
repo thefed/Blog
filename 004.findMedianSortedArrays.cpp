@@ -1,9 +1,12 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<assert.h>
+// LC 4, find median of two sorted arrays, return double
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cassert>
 using namespace std;
+
 // return the kth smallest element in the two arrays: nums1[s1, e1) and nums2[s2, e2)
+// 1 <= k <= m+n (total length)
 int findKth(vector<int> &nums1, int s1, int e1, vector<int> &nums2, int s2, int e2, int k) {
     // ensure array1 is shorter than array2
     if (e1 - s1 > e2 - s2) {
@@ -11,7 +14,7 @@ int findKth(vector<int> &nums1, int s1, int e1, vector<int> &nums2, int s2, int 
     }
     // if the shorter array is empty, return the median of the other one
     if (s1 == e1) {
-       return nums2[s2 + k - 1]; 
+        return nums2[s2 + k - 1]; 
     }
     if (k == 1) {
         return min(nums1[s1], nums2[s2]);
@@ -36,6 +39,7 @@ int findKth(vector<int> &nums1, int s1, int e1, vector<int> &nums2, int s2, int 
         return findKth(nums1, s1, s1 + x, nums2, s2 + y, e2, x);
     }
 }
+
 double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
     // if the total number of elements is odd
     const int N1 = nums1.size();
@@ -49,9 +53,10 @@ double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
         return (findKth(nums1, 0, N1, nums2, 0, N2, k) + median1) / 2.0;
     }
 }
+
 int main() {
-    vector<int> nums1 = {1, 3, 5};
-    vector<int> nums2 = {2, 4, 6, 8, 10};
+    vector<int> nums1 = {1, 3, 5}, nums2 = {2, 4, 6, 8, 10};
+    // {1,2,3,4,5,6,8,10}, median = 5
     int m1 = findKth(nums1, 0, nums1.size(), nums2, 0, nums2.size(), 5);
     assert(m1 == 5);
     int m2 = findKth(nums1, 0, nums1.size(), nums2, 0, nums2.size(), 4);
