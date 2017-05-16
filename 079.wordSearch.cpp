@@ -1,3 +1,11 @@
+// LC 79, word search
+// given board:
+//[
+//  ['A','B','C','E'],
+//  ['S','F','C','S'],
+//  ['A','D','E','E']
+//]
+// find word "ABCCED" can be a path in board, can only go up/down/left/right
 #include<iostream>
 #include<vector>
 #include<string>
