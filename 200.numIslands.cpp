@@ -6,6 +6,17 @@
 using namespace std;
 
 // DFS solution
+void traverse(vector<vector<char>>& grid, int i, int j) {
+    if (i < 0 || j < 0 || i > grid.size() || j > grid[0].size()
+            || grid[i][j] != '1') return;
+
+    // mark it as visited
+    grid[i][j] = '0';
+    traverse(grid, i + 1, j);
+    traverse(grid, i - 1, j);
+    traverse(grid, i, j + 1);
+    traverse(grid, i, j - 1);
+}
 //
 // BFS solution: need a queue
 void BFS(vector<vector<char> > &grid, int x, int y) {

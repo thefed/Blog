@@ -13,7 +13,8 @@
 using namespace std;
 bool isFound(vector<vector<char> >& b, int i, int j, string word) {
     // cout << b[i][j] << ", " << word[0] << endl;
-    if (i >= 0 && j >= 0 && i < b.size() && j < b[0].size() && b[i][j] == word[0] && b[i][j] != 0) {
+    if (i >= 0 && j >= 0 && i < b.size() && j < b[0].size() 
+            && b[i][j] == word[0] && b[i][j] != 0) {
         if (word.size() == 1) {  // the last char
             return true;            
         }
