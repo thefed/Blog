@@ -1,4 +1,4 @@
-// LC 85, find max rectange (made up of 1s in the matrix)
+// LC 85, find max rectangle (made up of 1s in the matrix)
 #include <iostream>
 #include <vector>
 #include <cassert>
