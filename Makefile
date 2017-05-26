@@ -3,12 +3,11 @@
 CC = g++
 CFLAGS = -Wall -g -std=c++11 
 
-#EXT = ""		#.cpp
 SRC = LinkedList.cpp	# source cpp file name
 
 all: d			# executable name
 
-d: $(SRC)$(EXT)
+d: $(SRC)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
