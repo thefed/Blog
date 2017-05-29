@@ -1,5 +1,6 @@
-// LC 325, get max len of sub array (continuous) whose sum == given k
-// array of n integers
+// LC 325, get max len of continuous sub-array
+// whose sum == given k
+// from an array of n integers
 // return 0 if no such sub array
 // [1,-1,5,-2,3] and k = 3, return 4;
 // as [1,-1,5,-2] has max len
@@ -36,9 +37,13 @@ int maxSubArrayLen(vector<int>& nums, int k) {
 	return maxLen == 0 ? 0 : maxLen;
 }
 
-// hash table, store {key=sum till nums[i], value=i}
+// hash table, store {key=sum till nums[i], value=i(min index to get sum <key>)}
 // utilize previous sum
 // k=3, cur sum=10, if there is a previous sum=10-3, then update maxLen
+
+// input   {1,-1,5,-2,3}, k=3
+// key(sum) 1  0 5 3  6
+// val(idx) 0  1 2 3  4
 int maxSubArrayLen_hash(vector<int>& nums, int k) {
 	if (nums.empty()) return  0;
 	int maxLen = 0;
@@ -52,7 +57,7 @@ int maxSubArrayLen_hash(vector<int>& nums, int k) {
 			// check if there is a sum value == sum - k
 			maxLen = max(maxLen, i - m[sum - k]);
 		}
-		// sum is not in it
+		// add index i iff sum is not in it
 		if (m.find(sum) == m.end()) m[sum] = i;
 	}
 	return maxLen;
