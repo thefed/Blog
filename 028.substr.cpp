@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 // KMP, return longest proper prefix/suffix array of pattern 's'
-vector<int> computeKMP(string s) {
+vector<int> computeKMP(string& s) {
     const int n = s.size();
     vector<int> lps(n, 0);
     // lps[0] = 0;
@@ -27,6 +27,7 @@ vector<int> computeKMP(string s) {
     return lps;
 }
 
+// KMP solution: O(m), m = haystack.size()
 int strStr_kmp(string haystack, string needle) {
     const int m = haystack.size(), n = needle.size();
     if (!n) return 0;
@@ -43,7 +44,7 @@ int strStr_kmp(string haystack, string needle) {
 
         if (i < m && haystack[i] != needle[j]) {
             if (j > 0) j = lps[j - 1];  // skip previous sub-pattern
-            else i++;
+            else i++;   // does not match from needle[0]
         }
     }
     return -1;

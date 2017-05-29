@@ -48,6 +48,7 @@ string shortestPalindrome_kmp(string s) {
     return s_reversed.substr(0, suffix_len) + s;
 }
 
+// brute force, time O(n^2)
 string shortestPalindrome(string s) {
     if (s.size() <= 1) return s;
     if (isPalindrome(s)) return s;
@@ -61,7 +62,6 @@ string shortestPalindrome(string s) {
             // cout << "isPalindrome: " << prefix << endl;
             maxLen = max(maxLen, i);
         }
-        // else break;
     }
     if (maxLen == n) return s;
     // then [0..i-1] is palindrome
