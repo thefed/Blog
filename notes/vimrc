@@ -1,23 +1,27 @@
+" my vim configuration file
+" updated 5/31/2017
 filetype plugin indent on
 syntax on
 
 set showcmd
-
-set hlsearch
-
+set hlsearch 
 set wildmenu
-
 set ignorecase
-
 set smartcase
 
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
 
+"set num of spaces to insert when tab key is pressed
+set tabstop=4
+
+"change num of spaces inserted for indentation
 set shiftwidth=4
 
-set softtabstop=4
-
+"set to insert space chars whenever tab key is pressed
 set expandtab
 
-set number
+"set softtabstop=4
+set smartindent
 
+set number
+colorscheme desert
