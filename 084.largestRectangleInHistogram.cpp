@@ -12,7 +12,7 @@ int largestRectangleArea(vector<int>& heights) {
     int h = heights[0]; // previous min height
     for (int i = 1; i < n; i++) {
         int w = i - start + 1;
-        
+        // TODO
     }
     return 0;
 }
