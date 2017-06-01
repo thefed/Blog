@@ -19,6 +19,7 @@ string longestCommonPrefix(vector<string>& strs) {
 
     for (int i = 0; i < strs.size(); i++) {
         while (strs[i].substr(0, prefix.size()) != prefix) {
+            // shorten prefix till it matches all others
             prefix = prefix.substr(0, prefix.size() - 1);
             // prefix.erase(prefix.size() - 1);
             if (prefix.empty()) return "";
