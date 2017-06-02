@@ -6,8 +6,8 @@
 #include <cassert>
 using namespace std;
 // dp, time O(N), space O(N)
-// input: -2,1,-3,4,-1,2,1,-5,4
-// maxsum -2 1 -3 4 3  5 6 1  5
+// input: -2,1, -3,4,-1,2,1,-5,4
+// maxsum -2 -1 -3 4 3  5 6 1  5
 int maxSubArray(vector<int>& nums) {
 	if (nums.empty()) return 0;
 
