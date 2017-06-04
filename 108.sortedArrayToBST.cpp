@@ -1,20 +1,20 @@
-// convert sorted array to BST
-#include<iostream>
-#include<vector>
-#include<queue>
-#include<stack>
-#include<assert.h>
+// LC 108, convert sorted array to BST
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <assert.h>
 using namespace std;
 struct TreeNode {
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode *left, *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 // recursive solution
+// time: O(N), space: O(n), max depth
 TreeNode* sortedArrayToBSTHelper(vector<int> &nums, int start, int end) {
     if (start > end) return NULL;
-    else if (start == end) return new TreeNode(nums[start]);
+    if (start == end) return new TreeNode(nums[start]);
     //if (nums.empty()) return NULL;
     // 1 2 3 4 5 6 
     //      4
@@ -37,6 +37,7 @@ TreeNode* sortedArrayToBST(vector<int> &nums) {
 // recursive solution: 2 lines
 // if (!p || !q) return p == q; // one of the given roots is NULL
 // return sameTree(p->val == q->val && sameTree(p->left, q->left) && sameTree(p->right, q->right));
+// BFS, time O(n), space O(n)
 bool sameTree(TreeNode *root1, TreeNode *root2) {
     if (!root1 && !root2) return true;
     else if (!root1 || !root2) return false; // one of them is null
@@ -55,7 +56,7 @@ bool sameTree(TreeNode *root1, TreeNode *root2) {
             q1.pop();
             TreeNode *curr2 = q2.front();
             q2.pop();
-            assert(curr1->val == curr2->val);
+            // assert(curr1->val == curr2->val);
             if (curr1->val != curr2->val) return false;
             // check left subtree
             if (!curr1->left && !curr2->left) {}
