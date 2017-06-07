@@ -8,8 +8,7 @@ SRC = LinkedList.cpp	# source cpp file name
 all: d			# executable name
 
 d: $(SRC)
-	$(CC) $(CFLAGS) $< -o $@ && ./$@
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	@rm -f *.o d *.out
-	@rm -rf *.dSYM	 # remove debug files
+	@rm -f *.o d; rm -rf *.dSYM # remove debug files
