@@ -1,4 +1,10 @@
 // LC 32 longest valid parentheses
+// Given a string containing only '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+// follow-up: what if string contains "()" and "[]"? even "{}"?
+// ()()([][)
+// ()([)]
+//   2345
+
 #include <iostream>
 #include <vector>
 #include <cassert>
@@ -10,8 +16,12 @@ void print(const vector<int> &v) {
 	printf("\n");
 }
 
+// dp method?
+
 class Solution {
 public:
+    // method: stack, when s contains "[]{}", idea is the same
+    // time: O(n), space: O(n), worst case: entire str: all '('
     int longestValidParentheses(string s) {
         if (s.size() <= 1) return 0;
         const int n = s.size();
@@ -19,26 +29,21 @@ public:
         stack<int> st;
         for (int i = 0; i < n; i++) {
             if (s[i] == '(') st.push(i);
-            else {
-                if (!st.empty()) {
-                    if (s[st.top()] == '(') st.pop();   // matched
-                    else st.push(i);    // record the index of unmatched ')' 
-                }
-                else st.push(i);        // record the index of unmatched ')' 
-            }
+            // found a match, rm open brace index
+            else if (!st.empty() && s[st.top()] == '(') st.pop();   // matched
+            // empty or top item does not match with ')'
+            else st.push(i);
         }
-        // finally check stack
-        if (st.empty()) return n;   // the whole string is longest
-        else {
-            // the mached substrs are between the indices in stack
-            int right = n, left = 0;
-            while (!st.empty()) {
-                left = st.top(); st.pop();
-                longest = max(longest, right - left - 1);
-                right = left;
-            }
-            longest = max(longest, right);
+        // finally check indices in stack
+        // the valid substrs are between the indices in stack
+        int right = n, left = 0;
+        // if stack is empty, then entire stirng is valid
+        while (!st.empty()) {
+            left = st.top(); st.pop();
+            longest = max(longest, right - left - 1);
+            right = left;
         }
+        longest = max(longest, right);
         return longest;
     }
 };

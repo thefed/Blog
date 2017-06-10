@@ -50,7 +50,7 @@ string minWindow(string s, string t) {
 				//    1, map['B'] = 0
 				counter++;		// rollback counter, to be matched
 			}
-			// printf("begin: %d, end: %d, \n", begin, end);
+			printf("begin: %d, end: %d, \n", begin, end);
 		}
 	}
 	return len == INT_MAX ? "" : s.substr(old_start, len);
