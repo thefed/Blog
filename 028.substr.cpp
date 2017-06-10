@@ -6,6 +6,7 @@
 #include <vector>
 using namespace std;
 // KMP, return longest proper prefix/suffix array of pattern 's'
+// O(n)
 vector<int> computeKMP(string& s) {
     const int n = s.size();
     vector<int> lps(n, 0);
@@ -15,21 +16,34 @@ vector<int> computeKMP(string& s) {
     for (int i = 1; i < n; ) {
         if (s[i] == s[len]) lps[i++] = ++len;
 
-        else if (len != 0) {   // not  match
-                len = lps[len - 1];
-                // do not increment i here
+        else if (len != 0) {    // not  match
+            len = lps[len - 1]; // do not increment i here
         }
         else {
             lps[i] = 0;
             i++;
-        }   
+        }
     }
     return lps;
 }
 
+// in: a a a b, find "aaab"
+//kmp: 0 1 2 1
+vector<int> cmpKMP(string& s) {
+    int n = s.size();
+    vector<int> lps(n, 0);
+    int len = 0;    // matched prefix length till [i]
+    for (int i = 1; i < n; i++) {
+        if (s[i] == s[len]) lps[i++] = ++len;
+        else if (len > 0) len = lps[len - 1];
+        else lps[i++] = 0;
+    }
+    return lps;
+}
 // KMP solution: O(m), m = haystack.size()
 int strStr_kmp(string haystack, string needle) {
-    const int m = haystack.size(), n = needle.size();
+    const int m = haystack.size();
+    const int n = needle.size();
     if (!n) return 0;
 
     vector<int> lps = computeKMP(needle);
@@ -63,24 +77,33 @@ int strStr(string haystack, string needle) {
     }
     return -1;
 }
+
+// test kmp matched longest prefix length method
+void test_kmp() {
+    vector<string> strs = {"aaab", "ababc", "aabaaa"};
+    vector<vector<int>> exps = {
+        {0,1,2,0},
+        {0,0,1,2,0},
+        {0,1,0,1,2,2}
+    };
+    for (int i = 0; i < strs.size(); i++) {
+        assert(computeKMP(strs[i]) == exps[i]);
+    }
+}
 int main() {
-    string hay = "abc abcdabcde";
-    string needle = "abcde";
-    int exp = hay.find(needle); // 8
-    int res = strStr(hay, needle);
-    assert(res == exp);
+    test_kmp();
 
-    hay = "aaaaaab";
-    needle = "aaab";
-    exp = hay.find(needle); // 8
-    res = strStr(hay, needle);
-    assert(res == exp);
+    vector<string> hays = {"abc abcdabcde","aaaaaab"};
+    vector<string> needles = {"abcde",     "aaab"};
+    for (int i = 0; i < hays.size(); i++) {
+        string &hay = hays[i];
+        string &needle = needles[i];
+        int exp = hay.find(needle); // call std::string::find
+        int res = strStr(hay, needle);
+        assert(res == exp);
 
-    // test kmp computation
-    assert(computeKMP(needle) == (vector<int> {0,1,2,0}));
-    assert(computeKMP("ababc") == (vector<int> {0,0,1,2,0}));
-    assert(computeKMP("aabaaa") == (vector<int> {0,1,0,1,2,2}));
-
-    assert(strStr_kmp(hay, needle) == exp);
+        res = strStr_kmp(hay, needle);
+        assert(res == exp);
+    }
     return 0;
 }

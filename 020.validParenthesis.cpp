@@ -4,11 +4,11 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <vector>
 #include <cassert>
 using namespace std;
 bool isValid(string s) {
     stack<int> st;
-
     for (char c : s) {
         if (c == '(' || c == '[' || c == '{') {
             st.push(c);
@@ -23,16 +23,11 @@ bool isValid(string s) {
     return st.empty();
 }
 int main() {
-    string s = "()[]{([])}";
-    bool res = isValid(s);
-    assert(res);
-
-    s = "()[]{}(]";
-    res = isValid(s);
-    assert(!res);
-
-    s = "()[]{}(";
-    res = isValid(s);
-    assert(!res);
+    vector<string> strs = {"()[]{([])}", "()[]{}(]", "()[]{}("};
+    vector<int> exp = {1, 0, 0};
+    for (int i = 0; i < strs.size(); i++) {
+        bool res = isValid(strs[i]);
+        assert(res == exp[i]);
+    }
     return 0;
 }

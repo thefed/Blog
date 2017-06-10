@@ -4,7 +4,6 @@
 #include <vector>
 #include <cassert>
 #include <string>
-#include <string>
 #include <unordered_map>
 using namespace std;
 
@@ -14,13 +13,13 @@ using namespace std;
 // substractive notation (to avoid repeated four chars)
 //   4 9  40 90  400 900
 int romanToInt(string s) {
-    // process from the back
-    unordered_map<char, int> charToInt = {{'I',1}, {'V',5}, {'X',10}, 
+    // process from the back, to better handle case as "IV": 4, "CM": 900
+    unordered_map<char, int> charToInt = {{'I',1}, {'V',5}, {'X',10},
         {'L',50}, {'C',100},{'D',500},{'M',1000}};
     int sum = charToInt[s.back()];
     for (int i = s.size() - 2; i >= 0; i--) {
         if (charToInt[s[i]] < charToInt[s[i + 1]]) {
-            sum -= charToInt[s[i]]; // e.g., CM, IV 
+            sum -= charToInt[s[i]]; // e.g., CM, IV
         }
         else {
             sum += charToInt[s[i]];

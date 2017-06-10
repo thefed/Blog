@@ -14,7 +14,7 @@
 #include <cassert>
 using namespace std;
 
-// backtracking
+// backtrack
 // add pairs
 
 // left/right: num of left/right parenthesis added
@@ -23,7 +23,7 @@ void addPairs(vector<string>& res, string tmpRes, int left, int right, int n) {
         res.push_back(tmpRes);
         return;
     }
-
+    // note: the backtrack start condition
     if (left < n) {
         addPairs(res, tmpRes + "(", left + 1, right, n);
     }
@@ -44,16 +44,16 @@ vector<string> generateParenthesis(int n) {
     return res;
 }
 int main() {
-    assert(generateParenthesis(0).empty());
-    int n = 1;
-    vector<string> res = generateParenthesis(n);
-    vector<string> exp = {"()"};
-    assert(res == exp);
-
-    n = 2;
-    res = generateParenthesis(n);
-    exp = {"(())", "()()"};
-    assert(res == exp);
-
+    vector<int> ns = {0,1,2};
+    vector<vector<string>> exp = {
+        {},
+        {"()"},
+        {"(())", "()()"}
+    };
+    for (int i = 0; i < ns.size(); i++) {
+        int &n = ns[i];
+        vector<string> res = generateParenthesis(n);
+        assert(res == exp[i]);
+    }
     return 0;
 }

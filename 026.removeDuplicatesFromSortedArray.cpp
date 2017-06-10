@@ -1,15 +1,16 @@
 // LC 26, rm duplicates from sorted array
-// in place, return new length, 
+// in place, return new length,
 #include <iostream>
 #include <vector>
 #include <cassert>
 using namespace std;
 
-// two pointers
+// two pointers, O(n)
 int removeDuplicates(vector<int>& nums) {
-    if (nums.empty()) return 0;
-    int start = 0;
     const int n = nums.size();
+    if (n <= 1) return n;
+
+    int start = 0;  // start index of unique item
     for (int i = 1; i < n; i++) {
         while (i < n && nums[i] == nums[start]) {
             i++;
@@ -22,9 +23,17 @@ int removeDuplicates(vector<int>& nums) {
 }
 
 int main() {
-    vector<int> nums = {1,1,1,2,2,3,3,4};
-    int res = removeDuplicates(nums);
-    printf("res = %d\n", res);
-    assert(res == 4);
+    vector<vector<int>> numsList = {
+        {},
+        {1},
+        {1,1,1,2,2,3,3,4}
+    };
+    vector<int> exp = {0,1,4};
+    for (int i = 0; i < numsList.size(); i++) {
+        vector<int> &nums = numsList[i];
+        int res = removeDuplicates(nums);
+        printf("res = %d\n", res);
+        assert(res == exp[i]);
+    }
     return 0;
 }

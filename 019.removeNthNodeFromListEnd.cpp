@@ -10,14 +10,15 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
-// two pointers: fast, slow, mv "fast" n steps first
+// two pointers: fast/slow, mv "fast" n steps first
 // mv both another (length - n) steps
 ListNode* removeNthFromEnd(ListNode* head, int n) {
     if (!head) return head;
 
     ListNode preHead(0);
     preHead.next = head;
-    ListNode *fast = &preHead, *slow = &preHead;
+    ListNode *fast = &preHead;
+    ListNode *slow = &preHead;
     for (int i = 0; i < n; i++) {
         fast = fast->next;
     }
@@ -56,20 +57,25 @@ vector<int> getItems(ListNode *head) {
     return items;
 }
 int main() {
-    vector<int> items = {1,2,3,4,5};
-    ListNode *head = createList(items);
-    int n = 2;
-    ListNode *res = removeNthFromEnd(head, n);
-    vector<int> resItems = getItems(res);
-    vector<int> expItems = {1,2,3,5};
-    assert(resItems == expItems);
-    deleteList(res);
-
-    items = {1};
-    head = createList(items);
-    n = 1;
-    res = removeNthFromEnd(head, n);
-    resItems = getItems(res);
-    assert(resItems.empty());
+    vector<vector<int>> itemsList = {
+        {},
+        {1},
+        {1,2,3,4,5}
+    };
+    vector<int> ns = {1, 1, 2};
+    vector<vector<int>> expItems = {
+        {},
+        {},
+        {1,2,3,5}
+    };
+    for (int i = 0; i < itemsList.size(); i++) {
+        vector<int>& items = itemsList[i];
+        ListNode *head = createList(items);
+        int &n = ns[i];
+        ListNode *res = removeNthFromEnd(head, n);
+        vector<int> resItems = getItems(res);
+        assert(resItems == expItems[i]);
+        deleteList(res);
+    }
     return 0;
 }

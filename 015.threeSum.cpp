@@ -1,5 +1,5 @@
-// LC 15, Given an array S of n integers, 
-// are there elements a, b, c in S such that a + b + c = 0? 
+// LC 15, Given an array S of n integers,
+// are there elements a, b, c in S such that a + b + c = 0?
 // Find all unique triplets in the array which gives the sum of zero.
 // The solution set must not contain duplicate triplets.
 /*S = [-1, 0, 1, 2, -1, -4],
@@ -21,7 +21,7 @@ vector<vector<int>> threeSum(vector<int>& nums) {
 
     sort(nums.begin(), nums.end()); // help skip duplidates later
 
-    // find all two sums that sums up to -nums[i] = a + b
+    // find all two sum pairs {a,b} where -nums[i] = a + b
     for (int i = 0; i <= nums.size() - 3; i++) {
         int targetSum = -nums[i];
         int start = i + 1;          // start/end index all two items

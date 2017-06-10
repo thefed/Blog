@@ -1,5 +1,5 @@
 // LC 16, 3Sum closest
-// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. 
+// Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers.
 // each input would have exactly one solution.
 // given array S = {-1 2 1 -4}, and target = 1.
 // return  2. (-1 + 2 + 1 = 2).
@@ -35,20 +35,18 @@ int threeSumClosest(vector<int>& nums, int target) {
             }
         }
 
+        // skip duplicate num1
         while (i < nums.size() - 3 && nums[i + 1] == nums[i]) i++;
     }
     return minVal;
 }
 
 int main() {
-    vector<int> nums;
-    int res, exp;
+    vector<int> nums = {-1,2,1,4};
+    int exp = 2;    // -1+2+1
     int target = 1;
-    nums = {-1,2,1,4};
-    target = 1;
-    res = threeSumClosest(nums, target);
+    int res = threeSumClosest(nums, target);
     printf("res = %d\n", res);
-    exp = 2;
     assert(res == exp);
     return 0;
 }

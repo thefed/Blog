@@ -15,7 +15,7 @@ convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 #include <string>
 #include <cassert>
 using namespace std;
-// n=4, period=2*n
+// n=4, period=2*n-2=6
 /*	"paypal is hiring"
 p     i     n 	[0],[6],[12]
 a   l s   i g   [1],[5], [7][11], [13]
@@ -30,17 +30,18 @@ string convert(string s, int n) {
 	const int len = s.size();
 	for (int row = 0; row < n; row++) {
 		int i = 0;
-		// the 1st and last rows contain only 1 item per row
+		// the 1st and last rows contain only 1 item per row per period
 		if (row == 0 || row == n - 1) {
 			while (row + i * period < len) {
 				res += s[row + i * period];
 				i++;
 			}
 		}
-		else {	// each peroid has 2 items per row
-			while (row + i * period < len) {
+		else {	// other rows has 2 items per row per period
+			while (row + i * period < len) { // index valid
 				res += s[row + i * period];
-				int next_id = period - row + i * period;
+                // next item's index in current period
+				int next_id = (period - row) + i * period;
 				if (next_id < len) {
 					res += s[next_id];
 				}
@@ -54,7 +55,7 @@ string convert(string s, int n) {
 
 int main() {
 	string s1 = "PAYPALISHIRING";
-	assert(convert(s1, 1) == s1);	
+	assert(convert(s1, 1) == s1);
 
 	int nRows = 3;
 	string res1 = convert(s1, nRows);

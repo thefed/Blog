@@ -6,7 +6,7 @@
 using namespace std;
 string longestCommonPrefix(vector<string>& strs) {
     if (strs.empty()) return "";
-    
+
     // find min-len str
     int min_id = 0, minLen = strs[0].size();
     for (int i = 1; i < strs.size(); i++) {
@@ -28,16 +28,15 @@ string longestCommonPrefix(vector<string>& strs) {
     return prefix;
 }
 int main() {
-	vector<string> strs = {"a", "b"};
-	assert(longestCommonPrefix(strs) == "");
-
-	strs = {"ca", "a"};
-	assert(longestCommonPrefix(strs) == "");
-
-	strs = {"abcd", "abc", "ab", "a"};
-	assert(longestCommonPrefix(strs) == "a");
-
-	strs = {"abcd", "abc", "ab", "a", "d"};
-	assert(longestCommonPrefix(strs) == "");
+    vector<vector<string>> strsList = {
+        {"a", "b"},
+        {"ca", "a"},
+        {"abcd", "abc", "ab", "a"},
+        {"abcd", "abc", "ab", "a", "d"}
+    };
+	vector<string> exp = {"", "", "a", ""};
+    for (int i = 0; i < strsList.size(); i++) {
+        assert(longestCommonPrefix(strsList[i]) == exp[i]);
+    }
 	return 0;
 }

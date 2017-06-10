@@ -1,5 +1,5 @@
 // LC 25, reverse the nodes of a linked list k at a time and return its modified list.
-// Given a linked list, 
+// Given a linked list,
 // 1 <= k <= list length
 // If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
 // You may not alter the values in the nodes, only nodes itself may be changed.
@@ -39,8 +39,8 @@ void deleteList(ListNode *head) {
 ListNode* reverseKGroup(ListNode* head, int k) {
     // no need to reverse
     if (k == 1 || !head) return head;
-    
-    
+
+
     int len = 0;    // length of list
     ListNode preHead(0);
     preHead.next = head;
@@ -74,7 +74,7 @@ ListNode* reverseKGroup(ListNode* head, int k) {
     }
 
     return preHead.next;
-}   
+}
 
 vector<int> getItems(ListNode *head) {
     vector<int> items;
@@ -86,16 +86,17 @@ vector<int> getItems(ListNode *head) {
 }
 
 int main() {
-    vector<int> items = {1,2,3,4,5,6,7};
-    ListNode *head = createList(items);
-    int k = 2;
-    ListNode *res = reverseKGroup(head, k);
-
-    vector<int> resItems = getItems(res);
-    vector<int> expItems = {2,1,4,3,6,5,7};
-    assert(resItems == expItems); 
-
-    res = reverseKGroup(res, k);
-    deleteList(res);
+    vector<vector<int>> itemsList = {{1,2,3,4,5,6,7}, {2,1,4,3,6,5,7}};
+    vector<vector<int>> expItems = {{2,1,4,3,6,5,7}, {1,2,3,4,5,6,7}};
+    vector<int> ks = {2, 2};
+    for (int i = 0; i < itemsList.size(); i++) {
+        vector<int> &items = itemsList[i];
+        ListNode *head = createList(items);
+        int &k = ks[i];
+        ListNode *res = reverseKGroup(head, k);
+        vector<int> resItems = getItems(res);
+        assert(resItems == expItems[i]);
+        deleteList(res);
+    }
     return 0;
 }

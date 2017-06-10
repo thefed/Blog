@@ -10,8 +10,8 @@
 #include <cassert>
 #include <unordered_map>
 using namespace std;
-// backtracking
 
+// backtrack
 void getCombinations(string& digits, vector<string>& res, string tmpRes, int start) {
     if (tmpRes.size() == digits.size()) {
         res.push_back(tmpRes);
@@ -37,7 +37,7 @@ vector<string> letterCombinations(string digits) {
     return res;
 }
 
-// iterative method, 
+// iterative method
 vector<string> letterCombinations_i(string digits) {
     unordered_map<char, string> digitToChars = {
         {'0',"0"},{'1',"1"},{'2',"abc"},{'3',"def"},{'4',"ghi"},{'5',"jkl"},

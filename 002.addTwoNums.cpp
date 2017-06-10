@@ -1,6 +1,6 @@
 // LC 2, addTwoNums.cpp
 /*
-Input two non-empty linked lists representing two non-negative integers. 
+Input two non-empty linked lists representing two non-negative integers.
 The digits are stored in reverse order and each of their nodes contain a single digit.
 Add the two numbers and return it as a linked list.
 
@@ -18,6 +18,7 @@ struct ListNode {
 	ListNode *next;
 	ListNode(int x) : val(x), next(NULL) {}
 };
+// time: O(n)
 ListNode* addTwoNumbers(ListNode *l1, ListNode *l2) {
 	ListNode preHead(0);
 	ListNode *tail = &preHead;
@@ -64,24 +65,18 @@ vector<int> getItems(ListNode *head) {
 }
 
 int main() {
-	vector<int> nums1 = {2,4,3}, nums2 = {5,6,4};
-	vector<int> exp = {7,0,8};
-	ListNode *l1 = createList(nums1);
-	ListNode *l2 = createList(nums2);
-	ListNode *head = addTwoNumbers(l1, l2);
-	vector<int> res = getItems(head);
-	print(l1, "l1: ");
-	print(l2, "l2: ");
-	print(head, "l1 + l2: ");
-	assert(res == exp);
-
-	vector<int> nums3 = {8,8};
-	exp = {0,3,4};
-	ListNode *l3 = createList(nums3);
-	
-	head = addTwoNumbers(l1, l3);
-	res = getItems(head);
-	print(l3, "l3: ");
-	print(head, "l1 + l3: ");
-	assert(res == exp);
+    vector<vector<int>> nums1 = {{2,4,3}, {2,4,3}};
+    vector<vector<int>> nums2 = {{5,6,4}, {8,8}};
+    vector<vector<int>> exp   = {{7,0,8}, {0,3,4}};
+    for (int i = 0; i < nums1.size(); i++) {
+        printf("\ntest: %d\n", i + 1);
+        ListNode *l1 = createList(nums1[i]);
+        ListNode *l2 = createList(nums2[i]);
+        ListNode *head = addTwoNumbers(l1, l2);
+        vector<int> res = getItems(head);
+        print(l1, "l1: ");
+        print(l2, "l2: ");
+        print(head, "l1 + l2: ");
+        assert(res == exp[i]);
+    }
 }

@@ -9,6 +9,8 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+// maintain two pointers to lists, choose the smaller one and mv forward
+// append the remaining list to result
 ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
     ListNode preHead(0);
     ListNode *tail = &preHead;
@@ -26,6 +28,7 @@ ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
     tail->next = l1 ? l1 : l2;  // append the remaining nodes
     return preHead.next;
 }
+// for test use
 vector<int> getItems(ListNode *head) {
     vector<int> items;
     while (head) {
@@ -46,7 +49,7 @@ int main() {
     vector<int> nums1 = {1,3,5,7}, nums2 = {2,4,6,8,10};
     vector<int> exp = {1,2,3,4,5,6,7,8,10};
     ListNode *l1 = createList(nums1), *l2 = createList(nums2);
-    ListNode *head = mergeTwoLists(l1, l2); 
+    ListNode *head = mergeTwoLists(l1, l2);
     vector<int> res = getItems(head);
     assert(res == exp);
     return 0;

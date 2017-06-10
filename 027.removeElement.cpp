@@ -1,7 +1,8 @@
-#include<iostream>  // cout
-#include<vector>    // vector
-#include<assert.h>  // assert
-#include<time.h>    // clock
+// LC 27, rm elements which equal to given val from array
+#include <iostream>
+#include <vector>
+#include <cassert>
+#include <ctime>
 using namespace std;
 
 void testNumsWithRareVals();
@@ -14,21 +15,21 @@ int main() {
     cout << "*/\n";
 }
 
-// two pointers
+// two pointers, O(n), check start item and end item each iteration
 int removeElement(vector<int>& nums, int val) {
     if (nums.size() == 0)
         return 0;
     int start = 0;
     int end = nums.size() - 1;
     while (start < end) {
-        // current element == val, right pointer != val
+        // current element == val, try to grab one item from end
         if (nums[start] == val) {
             if (nums[end] != val) {
                 swap(nums[start], nums[end]);
                 start++;
             }
             end--;
-        }           
+        }
         else {
             start++;
             if (nums[end] == val) {
@@ -36,22 +37,23 @@ int removeElement(vector<int>& nums, int val) {
             }
         }
     }
-    return nums[start] == val ? start: start + 1; 
+    return nums[start] == val ? start: start + 1;
 }
+
 
 int removeElement2(vector<int>& nums, int val) {
     if (nums.size() == 0) return 0;
     int front = 0;
     int end = nums.size()-1;
     while (front <= end){
-        if ((nums[front] - val != 0) && (nums[end] - val == 0)) {
+        if ((nums[front] != val) && (nums[end] == val)) {
             end--;
             front++;
-        } else if ((nums[front] - val == 0) && (nums[end] - val != 0)) {
+        } else if ((nums[front] == val) && (nums[end] != val)) {
             swap(nums[front], nums[end]);
             end--;
             front++;
-        } else if ((nums[front] - val != 0) && (nums[end] - val != 0)) {
+        } else if ((nums[front] != val) && (nums[end] != val)) {
             front++;
         } else {
             end--;
@@ -63,17 +65,20 @@ int removeElement2(vector<int>& nums, int val) {
     return end + 1;
 }
 
-// avoid redundant comparisons, con: when nums contain rare target val, sucks for (start < end) checking
+// what if the majority items are matched with val?
+// mv start index till equal to val, mv end backward till unequal to val
+// to avoid redundant comparisons
+// con: when nums contain rare target val, sucks for (start < end) checking
 int removeElement3(vector<int>& nums, int val) {
     if (nums.size() == 0)
         return 0;
     int start = 0;
     int end = nums.size() - 1;
     while (start < end) {
-        while (nums[start] != val && start < end) {
+        while (start < end && nums[start] != val) {
             start++;
         }
-        while (nums[end] == val && end > start) {
+        while (start < end && nums[end] == val) {
             end--;
         }
         // here start == val or end != val or start == end
@@ -81,7 +86,7 @@ int removeElement3(vector<int>& nums, int val) {
             swap(nums[start], nums[end]);
         }
     }
-    return nums[start] == val ? start: start + 1; 
+    return nums[start] == val ? start: start + 1;
 }
 
 void runFunc(vector<int>&nums, const int val, const int expected) {
@@ -93,10 +98,10 @@ void runFunc(vector<int>&nums, const int val, const int expected) {
     cout << "len: " << removeElement(nums, val) << endl;
     cout << "removeElement: " << clock() - t << " ms\n";
 
-    t = clock();    
+    t = clock();
     assert(removeElement2(nums, val) == expected);
     for (int i = 0; i < N; i++)
-        removeElement2(nums, val); 
+        removeElement2(nums, val);
     cout << "removeElement2: " << clock() - t << " ms\n";
 
     t = clock();
@@ -110,24 +115,22 @@ void testNumsWithRareVals() {
     cout << "** testNumsWithRareVals **" << endl;
     const int val = 2;
     const int NUM = 100;
-    int* array = new int[NUM];
+    vector<int> nums(NUM);
     for (int i = 0; i < NUM; i++) {
-        *(array + i) = i;
+        nums[i] = i;
     }
     vector<int> nums(array, array + NUM);
-    const int expected = NUM - 1;
+    int expected = NUM - 1;
     runFunc(nums, val, expected);
-    delete [] array;
 }
 
 void testNumsWithFreqVals() {
     cout << "** testNumsWithFreqVals **" << endl;
     const int val = 2;
-    // int array[8] = {1, 2, 2, 3, 5, 6, 2, 2};
     const int NUM = 100;
     vector<int> nums;
     nums.assign(NUM, val);
-    const int expected = 0;
+    int expected = 0;
     runFunc(nums, val, expected);
 }
 

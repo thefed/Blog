@@ -1,8 +1,9 @@
+// LC 24, swap linked list node in pairs
 #include<iostream>
 #include<assert.h>
 using namespace std;
 struct ListNode{
-	int val; 
+	int val;
 	ListNode *next;
 	ListNode(int val, ListNode *next=NULL): val(val), next(next){}
 };
@@ -58,12 +59,13 @@ public:
 };
 
 ListNode* swapPairs(ListNode* head) {
-    if (!head || !(head->next))
-        return head;
+    if (!head || !(head->next)) return head;
+
     ListNode preHead(0);
     preHead.next = head;
     ListNode *prev = &preHead;
-    ListNode *curr = prev->next, *next = curr->next;
+    ListNode *curr = prev->next;
+    ListNode *next = curr->next;
     //   1 2 3 4
     // p c n
     //   2 1 3 4
@@ -79,7 +81,7 @@ ListNode* swapPairs(ListNode* head) {
         next->next = prev->next;
         prev->next = next;
 
-        // next = curr->next; 
+        // next = curr->next;
 
         // mv prev to curr, set curr to new start node
         // mv next

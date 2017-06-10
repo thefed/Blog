@@ -59,7 +59,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
         len = (len + 1) / 2;    // 3 or 4 lists both merged to 2 lists
     }
     return lists.front();
-}   
+}
 
 ListNode* createList(vector<int>& items) {
     ListNode preHead(0);
