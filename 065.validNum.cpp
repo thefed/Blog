@@ -1,4 +1,4 @@
-// LC 65, validate if a given string is numeric
+// LC 65, check if a given string is vaild numeric value
 // "0" true
 // " 0.1 " true
 // "abc" false
@@ -6,8 +6,8 @@
 // "2e10" true
 // It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.
 
-#include <iostream> 
-#include <string> 
+#include <iostream>
+#include <string>
 #include <cassert>
 using namespace std;
 bool isNumber(string s) {
@@ -26,7 +26,7 @@ bool isNumber(string s) {
 		if (isdigit(s[i])) {
 			hasNum = true;
 			// set numAfterE = true; if modified by meeting 'e'
-			numAfterE = true;	
+			numAfterE = true;
 		}
 		else if (s[i] == '.') {
 			if (hasPoint || hasE) return false;
@@ -57,6 +57,6 @@ int main() {
 
 	assert(isNumber("-1e-5"));
 	assert(isNumber("-1e-5"));
-	assert(isNumber("+1.5"));	
+	assert(isNumber("+1.5"));
 	return 0;
 }
