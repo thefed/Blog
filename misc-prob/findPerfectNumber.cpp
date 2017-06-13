@@ -1,5 +1,5 @@
-#include<iostream>
-#include<math.h>
+#include <iostream>
+#include <cmath>
 using namespace std;
 // perfect number: if the sum of n's factors equal to n itself, it is a perfect number
 // e.g. 6 = 1 + 2 + 3; 28 = 1 + 2 + 4 + 7 + 14

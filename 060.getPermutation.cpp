@@ -16,15 +16,15 @@ string getPermutation(int n, int k) {
 	vector<int> factorials(n, 1);	// [1,2,6,24],n=4
 	for (int i = 2; i <= n; i++) {
 		factorials[i - 1] = i * factorials[i - 2];
-	}	
-	vector<int> nums(n);	// [1..4]
+	}
+	vector<int> nums(n);	// create array [1..4]
 	for (int i = 1; i <= n; i++) nums[i - 1] = i;
 
 	string res;
-	k--;				//k=11
-	int i = n - 2;		// last digit to cmp
+	k--;				// convert k to zero-based index
+	int i = n - 2;		// last index to cmp
 	while (i >= 0) {
-		int id = k / factorials[i];	// [1], [2]
+		int id = k / factorials[i];	// [1], [2], the index to be used to fill permutation
 		res += to_string(nums[id]);	// "2" + "4" +"3"
 		nums.erase(nums.begin() + id);	// rm 2 from [1234] => [134] =>[13] => [1]
 		k %= factorials[i];			// [5], [1], [0]
@@ -35,16 +35,11 @@ string getPermutation(int n, int k) {
 }
 int main() {
 	int n = 3;
-	int k = 3;	
-	string res = getPermutation(n, k);
-	cout << res << endl;
-	assert(res == "213");
-
-	vector<string> exp = {"123","132","213","231","312","321"};
-	for (int i = 1; i <= 6; i++) {
-		res = getPermutation(n, i);
+	vector<string> exps = {"123","132","213","231","312","321"};
+	for (int i = 0; i < exps.size(); i++) {
+		string res = getPermutation(n, i + 1);
 		cout << res << endl;
-		assert(res == exp[i - 1]);
+		assert(res == exps[i]);
 	}
 	return 0;
 }

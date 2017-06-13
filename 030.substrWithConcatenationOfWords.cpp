@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <cassert>
 using namespace std;
+
+// time: O(n) * O(1) * O(k), => scan s, find word in map, at most k words
 vector<int> findSubstring(string s, vector<string>& words) {
     // use two maps: counts, counted
     unordered_map<string, int> counts;  // as words may contain duplicates

@@ -15,6 +15,9 @@ int main() {
     cout << "*/\n";
 }
 
+// note: rare matched items vs frequent matched items? how to minimize num of cmps?
+// two pointers: start/end
+
 // two pointers, O(n), check start item and end item each iteration
 int removeElement(vector<int>& nums, int val) {
     if (nums.size() == 0)

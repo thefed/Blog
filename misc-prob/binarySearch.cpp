@@ -1,8 +1,8 @@
-#include <iostream> 
-#include <vector>  
+#include <iostream>
+#include <vector>
 #include <algorithm> // sort
-#include <assert.h> 
-#include <string> 
+#include <cassert> 
+#include <string>
 using namespace std;
 
 const int N = 100;
@@ -35,7 +35,7 @@ int binarySearch(vector<int>& nums, int target){
     }
     if (nums[start] == target)
         return start;
-    if (nums[end] == target) 
+    if (nums[end] == target)
         return end;
     return -1;
 }
@@ -75,12 +75,12 @@ void testBSWithDistinctNums() {
     test(binarySearch, nums, target, expected, "array has no duplicates: \n");
 }
 /*
-search inexistent item: 
+search inexistent item:
 -1
-array with duplicates: 
+array with duplicates:
 20
-array with duplicates: 
+array with duplicates:
 0
-array has no duplicates: 
+array has no duplicates:
 50
 */

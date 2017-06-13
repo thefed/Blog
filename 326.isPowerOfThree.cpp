@@ -1,7 +1,7 @@
-#include<iostream>
-#include<unordered_set>
-#include<assert.h>
-#include<limits.h>
+#include <iostream>
+#include <unordered_set>
+#include <cassert>
+#include <climits>
 using namespace std;
 
 unordered_set<int> getPowerSet(int base) {
@@ -26,7 +26,7 @@ bool isPowerOfThree(int n) {
     return n > 0 && maxPowerVal % n == 0;
 }
 
-bool isPowerOfTree2(int n) {
+bool isPowerOfThree2(int n) {
     if (n > 1) {
         while (n % 3 == 0) {
             n /= 3;

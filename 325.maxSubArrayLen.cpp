@@ -1,5 +1,4 @@
-// LC 325, get max len of continuous sub-array
-// whose sum == given k
+// LC 325, get max len of continuous sub-array whose sum == given k
 // from an array of n integers
 // return 0 if no such sub array
 // [1,-1,5,-2,3] and k = 3, return 4;
@@ -26,7 +25,7 @@ int maxSubArrayLen(vector<int>& nums, int k) {
 	for (int i = 0; i < nums.size(); i++) {
 		if (maxLen >= nums.size() - i) break;
 
-		int sum = 0;	
+		int sum = 0;
 		for (int j = i; j < nums.size(); j++) {
 			sum += nums[j];
 			if (sum == k) {

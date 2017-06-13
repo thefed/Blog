@@ -1,7 +1,7 @@
 // impl sqrt, return int / double
-#include <iostream>  
-#include <math.h>      // sqrt
-#include <cassert>    
+#include <iostream>
+#include <cmath>      // sqrt
+#include <cassert>
 using namespace std;
 
 // return the last integer n, where n^2 <= x
@@ -12,7 +12,7 @@ int sqrt_int(int x) {
         long mid = start + (end - start) / 2;
         if (mid * mid <= x) {
             start = mid;
-        } 
+        }
         else {
             end = mid;
         }

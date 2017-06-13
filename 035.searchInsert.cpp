@@ -1,34 +1,41 @@
-#include<iostream>
-#include<vector>
-#include<assert.h>
+// LC 35, search for insert position
+// Given a sorted array and a target value, return the index if the target is found.
+// If not found, return the index where it would be if it were inserted in order.
+// assume no duplicates in the array.
+
+// Here are few examples.
+// [1,3,5,6], 5 → 2
+// [1,3,5,6], 2 → 1
+// [1,3,5,6], 7 → 4
+// [1,3,5,6], 0 → 0
+
+#include <iostream>
+#include <vector>
+#include <cassert>
 using namespace std;
+// binary search
 int searchInsert(vector<int>& nums, int target) {
-    // find the first element that is greater than target
-    if (nums.size() == 0)
-        return 0;
-    int left = 0;
-    int right = nums.size() - 1;
-    while (left < right) {
-        int mid = left + (right - left) / 2;
-        if (nums[mid] < target) {
-            left = mid + 1;
-        }
-        else if (nums[mid] > target) {
-            right = mid;
-        }
-        else {
-            return mid;
-        }
+    if (nums.empty()) return 0;
+    int low = 0;
+    int high = nums.size() - 1;
+    // find 1st one that <= target
+    while (low + 1 < high) {
+        int mid = low + (high - low) / 2;
+        if (nums[mid] == target) return mid;
+        else if (nums[mid] < target) low = mid + 1;
+        else high = mid;
     }
-    return (nums[left] < target) ? left + 1 : left;
-}
-void testSearchInsert(){
-    int array[] = {1, 3};
-    int target = 4;
-    vector<int> nums(array, array + sizeof(array) / sizeof(int));
-    int res = searchInsert(nums, target);
-    assert(res == 2 && "res should be 2");
+    if (target <= nums[low]) return low;
+    else if (target <= nums[high]) return high;
+    else return high + 1;
 }
 int main() {
-    testSearchInsert();
+    vector<int> nums = {1,3,5,6};
+    vector<int> targets = {5,2,7,0};
+    vector<int> exps = {2,1,4,0};   // expected position
+    for (int i = 0; i < targets.size(); i++) {
+        int res = searchInsert(nums, targets[i]);
+        assert(res == exps[i]);
+    }
+    return 0;
 }

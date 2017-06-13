@@ -29,8 +29,8 @@ int uniquePaths(int m, int n) {
 // 1 2 3 4
 // 1 3 6 10
 int main() {
-	// assert(uniquePaths(10, 1) == 1);
-	// assert(uniquePaths(1, 10) == 1);
+	assert(uniquePaths(10, 1) == 1);
+	assert(uniquePaths(1, 10) == 1);
 	assert(uniquePaths(3, 4) == 10);
 	return 0;
 }

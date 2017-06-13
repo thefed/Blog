@@ -40,7 +40,7 @@ bool isMatch(string s, string p) {
             if (p[j - 1] == '*') {
                 // matches empty char
                 // matched any sequence
-                f[i][j] = f[i][j - 1] || 
+                f[i][j] = f[i][j - 1] ||
                     f[i - 1][j];    // use "*" to match a char, keep j the same
             }
             else {
@@ -83,11 +83,6 @@ int main() {
 
     s = "abbaaaabbbbbababbbbbbbbaaabaabbabaabbaaabbbbabbbbab";
     p = "a*aaba***b**a*a********b";
-    assert(isMatch(s, p));    
-
-    /*
-    string p = "A";
-    cout << (int)p[1] << endl;  // output 0
-    */
+    assert(isMatch(s, p));
     return 0;
 }

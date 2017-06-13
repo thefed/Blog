@@ -55,17 +55,10 @@ void test(Solution &sol, const string s, int exp) {
 }
 int main() {
 	Solution sol;
-	test(sol, "", 0);
-	test(sol, "(", 0);
-	test(sol, ")(", 0);
-	test(sol, "()", 2);
-	test(sol, ")()", 2);
-	test(sol, "(())())", 6);
-
-	string s1 = ")()())";
-	test(sol, s1, 4);
-
-	string s2 = ")(((((()())()()))()(()))(";
-	test(sol, s2, 22);
+    vector<string> strs = {"","(",")(","()",")()","(())())",")()())",")(((((()())()()))()(()))("};
+    vector<int> exp     = {0,  0,   0,   2,   2,   6,       4,        22};
+    for (int i = 0; i < strs.size(); i++) {
+        test(sol, strs[i], exp[i]);
+    }
 	return 0;
 }

@@ -22,33 +22,22 @@ string countAndSay(int n) {
                 }
                 // now either i == s.size() - 1 or s[i] != s[i + 1]
                 // from i to end, all the same chars
-                res += to_string(cnt) + s[i];    
+                res += to_string(cnt) + s[i];
             }
             // check if last char equals the previous one
             if (s[s.size() - 1] != s[s.size() - 2]) {
-                res += to_string(1) + s[s.size() - 1];    
+                res += to_string(1) + s[s.size() - 1];
             }
         }
         cout << res << endl;
     }
     return res;
 }
-void test() {
-    string actual = countAndSay(1);
-    assert(actual == "1" && "wrong output");
-
-    actual = countAndSay(2);
-    assert(actual == "11" && "wrong output");    
-
-    actual = countAndSay(3);
-    assert(actual == "21" && "wrong output");    
-
-    actual = countAndSay(4);
-    assert(actual == "1211" && "wrong output");    
-
-    actual = countAndSay(5);
-    assert(actual == "111221" && "wrong output");    
-}
 int main() {
-    test();
+    vector<int> nums = {1,2,3,4,5};
+    vector<string> exps = {"1","11","21","1211","111221"};
+    for (int i = 0; i < nums.size(); i++) {
+        string res = countAndSay(nums[i]);
+        assert(res == exps[i]);
+    }
 }
