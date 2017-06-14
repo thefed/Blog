@@ -19,7 +19,12 @@ void printQ(priority_queue<pair<int, int> > pq) {
     printf("\n");
 }
 
-vector<int> topKFrequent(const vector<int> &nums, int k) {
+// unordered_map + prioriry_queue: O(n log(n - k))
+// e.g. find top 2 frequent from 100 items, queue size: 98
+
+// bucket sort: O(n)
+// if top 1 or 2?  linear search... O(n)
+vector<int> topKFrequent(vector<int>& nums, int k) {
     vector<int> res;
     unordered_map<int, int> map;
     for (int num : nums) map[num]++;
@@ -36,7 +41,37 @@ vector<int> topKFrequent(const vector<int> &nums, int k) {
 //       }
     }
     printQ(pq);
-    while (k > 0) { res.push_back(pq.top().second); pq.pop(); k--; }
+    while (k > 0) { 
+        res.push_back(pq.top().second); pq.pop(); 
+        k--; 
+    }
+    return res;
+}
+
+vector<int> topK_q(vector<int>& nums, int k) {
+    vector<int> res(k);
+    unordered_map<int, int> cnt;
+    for (int num : nums) cnt[num]++;
+
+    auto cmp = [](const pair<int, int>& p1, const pair<int, int>& p2){
+        return p1.second > p2.second;   // need to find most freq
+    };
+    priority_queue<pair<int, int>, vector<pair<int,int>>, decltype(cmp)> q(cmp);
+    for (auto it = cnt.begin(); it != cnt.end(); ++it) {
+        if (q.size() < k) {
+            q.push(make_pair(it->first, it->second));
+        }
+        else {
+            if (it->second > q.top().second) {
+                q.pop();
+                q.push(make_pair(it->first, it->second));
+            }
+        }
+    }
+    for (int i = k - 1; i >= 0; i--) {
+        res[i] = q.top().first; // add val
+        q.pop();
+    }
     return res;
 }
 
@@ -48,7 +83,7 @@ void print(const vector<int> &v) {
 int main() {
     vector<int> nums = {1,1,1,2,2,3,4, 5,5,5,5};
     int k = 2;
-    vector<int> res = topKFrequent(nums, k);
+    vector<int> res = topK_q(nums, k); //topKFrequent(nums, k);
     print(res);
     assert(res == (vector<int> {5, 1}));
 }
