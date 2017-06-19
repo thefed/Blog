@@ -11,14 +11,15 @@ using namespace std;
 
 // dp, O(kn), k: num of coins, n: amount
 int coinChange(vector<int>& coins, int amount) {
-    const int n = amount;
+    const int& n = amount;
     vector<int> minCoins(n + 1, INT_MAX);
     minCoins[0] = 0;
     for (int i = 1; i <= n; i++) {
-        for (int j = 0; j < coins.size(); j++) // try each coin
+        for (int j = 0; j < coins.size(); j++) { // try each coin
             if (i >= coins[j] && minCoins[i - coins[j]] != INT_MAX) {
                 minCoins[i] = min(minCoins[i], minCoins[i - coins[j]] + 1);    
             }
+        }
     }
     return minCoins[n] == INT_MAX ? -1 : minCoins[n];
 }

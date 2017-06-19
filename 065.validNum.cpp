@@ -6,23 +6,30 @@
 // "2e10" true
 // It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.
 
+// bad code...
+// rm leading and trailing spaces, trim()
+// int left = 0;
+// int right = s.size() - 1;
+// while (left <= right && s[left] == ' ') left++;
+// while (right >= left && s[right] == ' ') right--;
 #include <iostream>
 #include <string>
 #include <cassert>
 using namespace std;
 bool isNumber(string s) {
-	// rm leading and trailing spaces, trim()
-	int left = 0, right = s.size() - 1;
-	while (left <= right && s[left] == ' ') left++;
-	while (right >= left && s[right] == ' ') right--;
-	s = s.substr(left, right - left + 1);
-	if (s.empty()) return false;
+	int left = s.find_first_not_of(' ');
+	int right = s.find_last_not_of(' ');
+	if (left == string::npos) {
+		return false;	// s only contains space, no non-space chars
+	}
+	// s = s.substr(left, right - left + 1);	// avoid it!
 
 	bool hasNum = false;
 	bool hasPoint = false;
 	bool hasE = false;	// contains 'e' or not
 	bool numAfterE = true;
-	for (int i = 0; i < s.size(); i++) {
+	// for (int i = 0; i < s.size(); i++) {
+	for (int i = left; i <= right; i++) {
 		if (isdigit(s[i])) {
 			hasNum = true;
 			// set numAfterE = true; if modified by meeting 'e'

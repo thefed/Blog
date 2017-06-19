@@ -31,26 +31,35 @@ string simplifyPath(string path) {
     int next_slash = 0;
     vector<string> dirs;
     for (size_t i = path.find('/'); i < path.size(); ) {
-        if (path[i] == '/') {
-            // check repetive slashes
-            while (i + 1 < path.size() && path[i + 1] == '/') i++;
-            if (i + 1 == path.size()) {  // ending slash
-                break;
-                // return res;
-            }
-            else {
-                next_slash = path.find('/', i + 1);
-                string dir = next_slash != string::npos ? path.substr(i + 1, next_slash - i - 1) : 
-                    path.substr(i + 1);
-                if (dir == "..") {
-                    if (!dirs.empty())  dirs.pop_back();
-                }
-                else if (dir != ".") dirs.push_back(dir);    // save it
-                // else if (dir == ".") // ignore
+        // if (path[i] == '/') {, update start statement of loop to remove this if branch
+        // check repetive slashes
+        while (i + 1 < path.size() && path[i + 1] == '/') i++;
 
-                i = next_slash;
+        // if (i + 1 == path.size()) {  // ending slash
+        //     break;
+        //     // return res;
+        // }
+        // else {
+
+        if (i != path.size() - 1) {
+            next_slash = path.find('/', i + 1);
+            string dir = next_slash != string::npos ? path.substr(i + 1, next_slash - i - 1) : 
+                path.substr(i + 1);
+            if (dir == "..") {
+                if (!dirs.empty())  dirs.pop_back();
             }
+            else if (dir != ".") {
+                dirs.push_back(dir);    // save it
+            }
+            // else if (dir == ".") // ignore
+
+            i = next_slash;
         }
+        else {
+            i++;    // last char is '/', exit loop
+        }
+        // }
+        // }
     }
 
     // convert dirs stack into result path

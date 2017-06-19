@@ -12,15 +12,15 @@
 using namespace std;
 // hash table, O(n)
 int lengthOfLongestSubstring(string s) {
-    vector<char> v(128, -1);    // v[i]: last position of char i
+    vector<char> positions(128, -1);    // positions[i]: last position of char i
     int start = -1; // last position of char[0]
     int maxLen = 0;
     for (int i = 0; i < s.size(); i++) {
     	// i: end index
-        if (v[s[i]] > start) {	// exists, char appeared at position: v[s[i]]
-            start = v[s[i]];
+        if (positions[s[i]] > start) {	// exists, char appeared at position: v[s[i]]
+            start = positions[s[i]];
         }
-        v[s[i]] = i;	// update new index
+        positions[s[i]] = i;	// update new index
         maxLen = max(maxLen, i - start);
         // printf("s: %d, i: %d, max: %d\n", start, i, maxLen);
     }
