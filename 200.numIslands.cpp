@@ -1,26 +1,42 @@
-#include<iostream>
-#include<vector>
-#include<queue>
-#include<assert.h>
-
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <cassert>
 using namespace std;
 
-// DFS solution
-void traverse(vector<vector<char>>& grid, int i, int j) {
-    if (i < 0 || j < 0 || i > grid.size() || j > grid[0].size()
-            || grid[i][j] != '1') return;
+// DFS traverse from grid[i][j]
+void DFS_traverse(vector<vector<char>>& grid, int i, int j) {
+    // if (i < 0 || j < 0 || i > grid.size() || j > grid[0].size() ||
+    //     grid[i][j] != '1') {
+    //     return;
+    // }
 
-    // mark it as visited
-    grid[i][j] = '0';
-    traverse(grid, i + 1, j);
-    traverse(grid, i - 1, j);
-    traverse(grid, i, j + 1);
-    traverse(grid, i, j - 1);
+    // grid[i][j] = '0';
+    // DFS_traverse(grid, i + 1, j);
+    // DFS_traverse(grid, i - 1, j); 
+    // DFS_traverse(grid, i, j + 1);
+    // DFS_traverse(grid, i, j - 1);
+
+    if (grid[i][j] == '1') {
+        grid[i][j] = '0';    // mark it as visited
+        if (i + 1 < grid.size()) {
+            DFS_traverse(grid, i + 1, j);
+        }
+        if (i > 0) {
+            DFS_traverse(grid, i - 1, j); 
+        }  
+        if (j + 1 < grid[0].size()) {
+            DFS_traverse(grid, i, j + 1);
+        }
+        if (j > 0) {
+            DFS_traverse(grid, i, j - 1);
+        }
+    }
 }
-//
-// BFS solution: need a queue
-void BFS(vector<vector<char> > &grid, int x, int y) {
-    queue<vector<int> > q;  // store available neighbors
+
+// BFS traverse from grid[i][j]
+void BFS_traverse(vector<vector<char>>& grid, int x, int y) {
+    queue<vector<int>> q;  // store available neighbors
     q.push({x, y});
     grid[x][y] = '0';
 
@@ -34,7 +50,7 @@ void BFS(vector<vector<char> > &grid, int x, int y) {
             q.push({x - 1, y});
             grid[x - 1][y] = '0';
         }
-        if ( x < grid.size() - 1 && grid[x + 1][y] == '1') {
+        if (x + 1 < grid.size() && grid[x + 1][y] == '1') {
             q.push({x + 1, y});
             grid[x + 1][y] = '0';
         }
@@ -42,25 +58,23 @@ void BFS(vector<vector<char> > &grid, int x, int y) {
             q.push({x, y - 1});
             grid[x][y - 1] = '0';
         }
-        if (y < grid[0].size() && grid[x][y + 1] == '1') {
+        if (y + 1 < grid[0].size() && grid[x][y + 1] == '1') {
             q.push({x, y + 1});
             grid[x][y + 1] = '0';
         }
     }
 }
 
-
+// if (grid.empty() || grid[0].empty()) {
+//     return 0;
+// }
 int numIslands(vector<vector<char> > &grid) {
-    if (grid.empty() || grid[0].empty()) {
-        return 0;
-    }
-
     int res = 0;    
     for (int i = 0; i < grid.size(); i++) {
         for (int j = 0; j < grid[0].size(); j++) {
             if (grid[i][j] == '1') {
-            res++;
-            BFS(grid, i, j);
+                res++;
+                BFS_traverse(grid, i, j);
             }
         }
     }

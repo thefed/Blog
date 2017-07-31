@@ -11,21 +11,31 @@ void print(vector<int>& v) {
 }
 int uniquePaths(vector<vector<int>> matrix) {
     const int m = matrix.size();
-    if (!m || matrix[0].empty()) return 0;
+    if (!m || matrix[0].empty()) {
+        return 0;
+    }
     const int n = matrix[0].size();
 
     vector<int> numPaths(n, 1);
     // calc boundary: 1st row
     for (int j = 0; j < n; j++) {   // if met a 1, set all trailing items 0
-        if (matrix[0][j] == 1) while (j < n) numPaths[j++] = 0;
+        if (matrix[0][j] == 1) {
+            while (j < n) {
+                numPaths[j++] = 0;
+            }
+        }
     }
 
     for (int i = 1; i < m; i++) {
         // note left boundary
         if (matrix[i][0] == 1) numPaths[0] = 0;
         for (int j = 1; j < n; j++) {
-            if (matrix[i][j] == 0) numPaths[j] += numPaths[j - 1];
-            else numPaths[j] = 0;
+            if (matrix[i][j] == 0) {
+                numPaths[j] += numPaths[j - 1];
+            }
+            else {
+                numPaths[j] = 0;
+            }
         }
     }
     return numPaths[n - 1];

@@ -14,6 +14,7 @@ int calculateMinimumHP(vector<vector<int>>& dungeon) {
 
     // minHPs[i][j]: min HP needed to go from [i][j] to [m-1][n-1]
     vector<vector<int>> minHPs(m + 1, vector<int>(n + 1, INT_MAX));
+    
     // bottom/right boundary, used to compute f[m-1][n-1]
     minHPs[m][n - 1] = 1;
     minHPs[m - 1][n] = 1;

@@ -1,3 +1,4 @@
+# updated 6/5/2017
 # cleaning up duplicate entries in PATH
 #PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=":" '!a[$1]++')
 
@@ -10,8 +11,18 @@ export CLICOLOR=1
 export LSCOLORS=GxFxCxDxCxegedabagaced
 #alias ls='ls -GFh'
 alias l='ls'
-alias ll='ls -hl'
+alias ll='ls -hla'
+
+# ls -i # print file serial num (inode num), hard link vs soft link
 
 # open file with sublime
 export EDITOR='subl -w'
 
+alias lc='leetcode'
+alias grep='grep --color'
+
+# find file by name (case insensitive) in current directory
+alias findi='find . -iname'
+
+# use g++ -std=c++11 by default
+alias g++='g++ -Wall -g -std=c++11'
